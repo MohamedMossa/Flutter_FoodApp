@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
+import 'package:food_delivery_app/widget/app_column.dart';
 import 'package:food_delivery_app/widget/icon_and_text.dart';
 import 'package:food_delivery_app/widget/small_text.dart';
 import '../../widget/big_text.dart';
@@ -232,61 +233,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   right: Dimensions.width15,
                   left: Dimensions.width15,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: 'Chinese Side'),
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                              5,
-                              (index) => Icon(
-                                    Icons.star,
-                                    color: AppColors.mainColor,
-                                    size: 15,
-                                  )),
-                        ),
-                        SizedBox(
-                          width: Dimensions.width10,
-                        ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: Dimensions.width10,
-                        ),
-                        SmallText(text: "1287"),
-                        SizedBox(
-                          width: Dimensions.width10,
-                        ),
-                        SmallText(text: "comments"),
-                      ],
-                    ),
-                    SizedBox(height: Dimensions.height15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndTextWidget(
-                          icon: Icons.circle_sharp,
-                          iconColor: AppColors.iconColor1,
-                          text: 'Normal',
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on,
-                          iconColor: AppColors.mainColor,
-                          text: '1.7 km',
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          iconColor: AppColors.iconColor2,
-                          text: '32min',
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                child: AppColumn(text: 'chinese',),
               ),
             ),
           ),

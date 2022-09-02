@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/widget/small_text.dart';
 import '../utils/colors.dart';
@@ -17,7 +16,7 @@ class AppColumn extends StatelessWidget {
       children: [
         BigText(text: text,size: Dimensions.font26,),
         SizedBox(
-          height: Dimensions.height10,
+         // height: Dimensions.height5,
         ),
         Row(
           children: [
@@ -44,7 +43,7 @@ class AppColumn extends StatelessWidget {
             SmallText(text: "comments"),
           ],
         ),
-        SizedBox(height: Dimensions.height15),
+        SizedBox(height: Dimensions.height10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

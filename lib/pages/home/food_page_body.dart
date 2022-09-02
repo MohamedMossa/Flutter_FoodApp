@@ -1,5 +1,4 @@
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:food_delivery_app/utils/colors.dart';
@@ -103,7 +102,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       decoration:  BoxDecoration(
                         borderRadius:BorderRadius.circular(Dimensions.radius20),
                         image: const DecorationImage(fit: BoxFit.cover,
-                          image: const AssetImage("assets/image/food0.png"),
+                          image: AssetImage("assets/image/food0.png"),
                         ),
                       ),
                     ),
@@ -215,7 +214,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                      const BoxShadow(
                     color: const Color(0xFFe8e8e8),
                     blurRadius: 5.0,
-                    offset:    const Offset(0, 5),
+                    offset:    Offset(0, 5),
                   ),
                      const BoxShadow(
                     color: Colors.white,
@@ -233,7 +232,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   right: Dimensions.width15,
                   left: Dimensions.width15,
                 ),
-                child: AppColumn(text: 'chinese',),
+                child: const AppColumn(text: 'chinese',),
               ),
             ),
           ),

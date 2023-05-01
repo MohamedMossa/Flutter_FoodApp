@@ -6,6 +6,7 @@ import 'package:food_delivery_app/pages/food/recommended_food_detail.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
 //import 'package:get/get_core/src/get_main.dart';
 //import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'controller/recommended_product_controler.dart';
 import 'helper/dependencies.dart' as dep;
 import 'package:get/get.dart';
 
@@ -24,13 +25,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Food App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RecommendedFoodDetail(),
+      home: MainFoodPage(),
     );
   }
 }

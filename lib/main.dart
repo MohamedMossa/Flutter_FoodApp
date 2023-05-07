@@ -4,6 +4,7 @@ import 'package:food_delivery_app/controller/popular_product_controller.dart';
 import 'package:food_delivery_app/pages/food/popular_food_details.dart';
 import 'package:food_delivery_app/pages/food/recommended_food_detail.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 //import 'package:get/get_core/src/get_main.dart';
 //import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'controller/recommended_product_controler.dart';
@@ -29,10 +30,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Food App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }

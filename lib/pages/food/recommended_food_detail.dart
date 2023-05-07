@@ -1,27 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
+import 'package:food_delivery_app/utils/app_constants.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/widget/big_text.dart';
 import 'package:food_delivery_app/widget/expandable_text_widgit.dart';
-import 'package:food_delivery_app/widget/small_text.dart';
-
+import 'package:get/get.dart';
+import '../../controller/recommended_product_controler.dart';
 import '../../utils/colors.dart';
 import '../../widget/app_icon.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+ final  int pageId;
+  const RecommendedFoodDetail({Key? key,required this.pageId}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
+
     return Scaffold(
       backgroundColor: Colors.white,
         body: CustomScrollView(
       slivers: [
         SliverAppBar(
+          automaticallyImplyLeading: false,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppIcon(icon: Icons.clear,),
+              GestureDetector(
+                onTap:(){
+                  Get.toNamed(RouteHelper.getInitial());
+        },
+                  child: AppIcon(icon: Icons.clear,)),
               AppIcon(icon: Icons.shopping_cart_outlined,),
             ],
           ),
@@ -36,43 +47,28 @@ class RecommendedFoodDetail extends StatelessWidget {
               topRight: Radius.circular(Dimensions.radius20),
                 )
               ),
-              child: Center(child: BigText(text:"Chinese Side",size: Dimensions.font26,color:AppColors.titleColor, )),
+              child: Center(child: BigText(text:product.name!,size: Dimensions.font26,color:AppColors.titleColor, )),
             ),),
           backgroundColor: AppColors.yellowColor,
           pinned: true,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.asset("assets/image/food0.png",fit:BoxFit.cover,),
+            background: Image.network(
+            AppConstants.BASE_URL+AppConstants.UPLOAD_URL+product.img,
+              fit:BoxFit.cover,),
           ),
         ),
         SliverToBoxAdapter(
-          child: Container(
-            margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
             child: Column(
               children: [
-                ExpandableTextWidget(text: "Chicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par boiled Chicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par boiledChicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par boiled""Chicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par boiled Chicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par boiledChicken marinated in aspiced"
-                    "yoghurt is placed in a large pot,then layered with fried"
-                    " onions (cheeky easy sub below!), fresh "
-                    "coriander/cilantro,then par ")
+                Container(
+                      margin: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width20),
+                      child: ExpandableTextWidget(text: product.description!),
+                )
               ],
             ),
           ),
-        ),
+
       ],
     ),
       bottomNavigationBar: Column(
@@ -90,7 +86,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 AppIcon(icon: Icons.remove,iconColor: Colors.white,
                   iconSize: Dimensions.iconSize24,
                   backgroundColor: AppColors.mainColor,),
-                BigText(text: "\$12.88 "+"X "+"0 ",
+                BigText(text: "\$ ${product.price!} "+"X "+"0 ",
                   color: AppColors.mainBlackColor,
                 size: Dimensions.font26,),
                 AppIcon(icon: Icons.add,iconColor: Colors.white,

@@ -6,7 +6,6 @@ class SmallText extends StatelessWidget {
   double size;
   double height;
 
-
   SmallText({
     Key? key,
     required this.text,

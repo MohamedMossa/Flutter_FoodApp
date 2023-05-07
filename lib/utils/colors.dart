@@ -14,4 +14,7 @@ class AppColors{
   //static final Color yellowColor = const Color(0xFFfa7552);
   static final Color yellowColor = const Color(0xFFffd379);
 
+  static final Color loadingColor=const Color(0xFF9294cc);
+  static final Color loadingColor2=const Color(0xFF69c5df);
+
 }

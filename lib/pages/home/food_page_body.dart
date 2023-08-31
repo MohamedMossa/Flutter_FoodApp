@@ -11,7 +11,6 @@ import 'package:food_delivery_app/widget/icon_and_text.dart';
 import 'package:food_delivery_app/widget/small_text.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import '../../controller/recommended_product_controler.dart';
 import '../../moduls/products_model.dart';
 import '../../widget/app_column.dart';
@@ -42,6 +41,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   @override
   // to free up memory
   void dispose() {
+    super.dispose();
     pageController.dispose();
   }
 

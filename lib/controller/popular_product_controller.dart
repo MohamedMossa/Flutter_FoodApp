@@ -3,6 +3,7 @@ import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:get/get.dart';
 import '../data/repository/popular_product_repo.dart';
+import '../moduls/cart_model.dart';
 import '../moduls/products_model.dart';
 
 class PopularProductController extends GetxController {
@@ -40,31 +41,64 @@ class PopularProductController extends GetxController {
     update();
   }
   int checkQuantity(int quantity){
-    if(quantity<0){
+    if((_inCartItems+quantity)<0){
       Get.snackbar("Notes", "You cant reduce more!",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if(_inCartItems>0){
+        _quantity = -_inCartItems;
+        return _quantity;
+
+      }
       return 0;
-    }else if(quantity>20){
+    }else if((_inCartItems+quantity)>20){
       Get.snackbar("Notes", "You cant add more!",
         backgroundColor: AppColors.mainColor,
           colorText: Colors.white,
       );
+
       return 20;
     }else{
       return quantity;
     }
   }
 
-  void initProduct(CartController cart){
+  void initProduct(ProductModel product, CartController cart){
     _quantity=0;
     _inCartItems=0;
     _cart = cart;
-
+    var exist=false;
+    exist =_cart.existInCart(product);
+    
+    print("exist or not: "+exist.toString());
+    if(exist){
+      _inCartItems=cart.getQuantity(product);
+    }
+    print("the quantity in the cart is "+_inCartItems.toString());
   }
   void addItem(ProductModel product){
-    _cart.addItem(product, _quantity);
+ // if(_quantity>0){
 
+    _cart.addItem(product, _quantity);
+    _quantity=0;
+    _inCartItems=_cart.getQuantity(product);
+    _cart.items.forEach((key, value) {
+    print("the id is"+value.id.toString()+"the quantity is"+value.quantity.toString());
+    });
+
+ // }
+  // else{
+  //
+  // }
+    update();
   }
+
+  int get totalItems{
+    return _cart.totalItems;
+  }
+List<CartModel> get getItems{
+    return _cart.getItems;
+}
+
 }

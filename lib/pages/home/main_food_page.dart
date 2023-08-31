@@ -19,11 +19,11 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     //show the screen Dimensions
-    print("current height is " + MediaQuery.of(context).size.height.toString());
-    print("current width is " + MediaQuery.of(context).size.width.toString());
-
-    print("get height" + Get.height.toString());
-    print("get width" + Get.width.toString());
+    // print("current height is " + MediaQuery.of(context).size.height.toString());
+    // print("current width is " + MediaQuery.of(context).size.width.toString());
+    //
+    // print("get height" + Get.height.toString());
+    // print("get width" + Get.width.toString());
     return Scaffold(
       body: Column(
         children: [

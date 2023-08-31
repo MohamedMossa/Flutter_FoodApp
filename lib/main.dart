@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery_app/controller/popular_product_controller.dart';
+import 'package:food_delivery_app/pages/cart/cart_page.dart';
 import 'package:food_delivery_app/pages/food/popular_food_details.dart';
 import 'package:food_delivery_app/pages/food/recommended_food_detail.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
@@ -36,3 +37,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+

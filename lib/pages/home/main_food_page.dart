@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utils/colors.dart';
-import 'package:get/get.dart';
 
 import '../../utils/dimensions.dart';
 import '../../widget/big_text.dart';

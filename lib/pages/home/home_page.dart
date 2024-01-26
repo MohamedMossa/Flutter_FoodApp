@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/pages/account/account_page.dart';
 import 'package:food_delivery_app/pages/cart/cart_history.dart';
 import 'package:food_delivery_app/pages/home/main_food_page.dart';
 import 'package:food_delivery_app/utils/colors.dart';
@@ -13,10 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex=0;
   List pages = [
-    MainFoodPage(),
+     MainFoodPage(),
     Center(child: Text("page"),),
    CartHistory(),
-    Center(child: Text("Next Next page"),),
+   AccountPage()
   ];
 
   void onTapNav(int index){

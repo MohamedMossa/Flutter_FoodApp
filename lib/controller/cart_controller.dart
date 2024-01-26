@@ -5,53 +5,54 @@ import 'package:get/get.dart';
 import '../moduls/cart_model.dart';
 import '../utils/colors.dart';
 
-class CartController extends GetxController{
+class CartController extends GetxController {
   final CartRepo cartRepo;
   CartController({required this.cartRepo});
-  Map<int, CartModel>_items={};
-  Map<int, CartModel>get items=>_items  ;
+  Map<int, CartModel> _items = {};
+  Map<int, CartModel> get items => _items;
 
   //only for storage and sharedPreferences
-  List<CartModel> storageItems=[];
+  List<CartModel> storageItems = [];
 
-
-  void addItem(ProductModel product,int quantity){
-    int totalQuantity=0;
-    if(_items.containsKey(product.id!)){
+  void addItem(ProductModel product, int quantity) {
+    int totalQuantity = 0;
+    if (_items.containsKey(product.id!)) {
       _items.update(product.id!, (value) {
-        totalQuantity=value.quantity!+quantity;
+        totalQuantity = value.quantity! + quantity;
         return CartModel(
-          id:product.id,
-          name:value.name,
-          price:value.price,
-          img: value.img,
-          quantity: value.quantity!+quantity,
-          isExist:true,
-          time: DateTime.now().toString(),
-          product: product
-        );
+            id: product.id,
+            name: value.name,
+            price: value.price,
+            img: value.img,
+            quantity: value.quantity! + quantity,
+            isExist: true,
+            time: DateTime.now().toString(),
+            product: product);
       });
 
-      if(totalQuantity<=0){
+      if (totalQuantity <= 0) {
         _items.remove(product.id);
       }
-    }else{
-      if(quantity>0){
-        _items.putIfAbsent(product.id!, () {
-          return CartModel(
-            id:product.id,
-            name:product.name,
-            price:product.price,
-            img: product.img,
-            quantity: quantity,
-            isExist:true,
-            time: DateTime.now().toString(),
-              product: product
-          );
-        },
+    } else {
+      if (quantity > 0) {
+        _items.putIfAbsent(
+          product.id!,
+          () {
+            return CartModel(
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                img: product.img,
+                quantity: quantity,
+                isExist: true,
+                time: DateTime.now().toString(),
+                product: product);
+          },
         );
-      }else{
-        Get.snackbar("Note", "You should at least add one item in the cart!",
+      } else {
+        Get.snackbar(
+          "Note",
+          "You should at least add one item in the cart!",
           backgroundColor: AppColors.mainColor,
           colorText: Colors.white,
         );
@@ -61,7 +62,6 @@ class CartController extends GetxController{
     update();
   }
 
-
   bool existInCart(ProductModel product) {
     if (_items.containsKey(product.id)) {
       return true;
@@ -69,11 +69,11 @@ class CartController extends GetxController{
     return false;
   }
 
-  int getQuantity(ProductModel product){
-    var quantity=0;
-    if(_items.containsKey(product.id)){
+  int getQuantity(ProductModel product) {
+    var quantity = 0;
+    if (_items.containsKey(product.id)) {
       _items.forEach((key, value) {
-        if(key==product.id){
+        if (key == product.id) {
           quantity = value.quantity!;
         }
       });
@@ -81,48 +81,67 @@ class CartController extends GetxController{
     return quantity;
   }
 
-  int get totalItems{
-    var totalQuantity=0;
+  int get totalItems {
+    var totalQuantity = 0;
     _items.forEach((key, value) {
-    totalQuantity=  totalQuantity+value.quantity!;
+      totalQuantity = totalQuantity + value.quantity!;
     });
     return totalQuantity;
   }
 
-///this is the cart items list  & convert map to list
-  List<CartModel> get getItems{
-  return _items.entries.map((e){
-     return e.value;
-  }).toList();
-}
+  ///this is the cart items list  & convert map to list
+  List<CartModel> get getItems {
+    return _items.entries.map((e) {
+      return e.value;
+    }).toList();
+  }
 
-int get totalAmount{
+  int get totalAmount {
     var total = 0;
     _items.forEach((key, value) {
-      total += value.quantity!*value.price!;
+      total += value.quantity! * value.price!;
     });
     return total;
-}
+  }
 
- List<CartModel> getCartData(){
-  setCart = cartRepo.getCartList();
+  List<CartModel> getCartData() {
+    setCart = cartRepo.getCartList();
 
     return storageItems;
   }
 
-  set setCart(List<CartModel>items){
-      storageItems=items;
-      debugPrint("length of cart items "+ storageItems.length.toString());
-      for(int i=0; i< storageItems.length; i++){
-        _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
-      }
+  set setCart(List<CartModel> items) {
+    storageItems = items;
+    debugPrint("length of cart items " + storageItems.length.toString());
+    for (int i = 0; i < storageItems.length; i++) {
+      _items.putIfAbsent(storageItems[i].product!.id!, () => storageItems[i]);
+    }
   }
-void addToHistory(){
+
+  void addToHistory() {
     cartRepo.addToCartHistoryList();
     clear();
-}
-void clear(){
-    _items={};
+  }
+
+  void clear() {
+    _items = {};
     update();
-}
+  }
+
+  List<CartModel> getCartHistoryList() {
+    return cartRepo.getCartHistoryList();
+  }
+
+/// from here you have to add to felfel
+
+  set setItems(Map<int, CartModel> setItems) {
+    _items = {};
+    _items = setItems;
+  }
+
+  void addToCartList(){
+    cartRepo.addToCartList(getItems);
+    update();
+
+  }
 }
